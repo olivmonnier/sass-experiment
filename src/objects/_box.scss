@@ -2,7 +2,9 @@
   'u-align-left'
 );
 
-.o-box {
-  display: block;
-  width: 100%;
+@include render('box') {
+  .o-box {
+    display: block;
+    width: 100%;
+  }
 }
