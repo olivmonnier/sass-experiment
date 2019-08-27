@@ -1,0 +1,17 @@
+{
+  "name": "sass-experiment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rimraf dest",
+    "build": "npm run clean && node-sass src/main.scss dest/styles.css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node-sass": "^4.12.0",
+    "rimraf": "^3.0.0"
+  }
+}

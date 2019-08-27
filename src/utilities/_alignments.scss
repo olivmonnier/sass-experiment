@@ -1,0 +1,11 @@
+@include filter('u-align-left') {
+  .u-align-left {
+    text-align: left !important;
+  }
+}
+
+@include filter('u-align-right') {
+  .u-align-right {
+    text-align: right !important;
+  }
+}

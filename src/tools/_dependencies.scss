@@ -1,0 +1,10 @@
+@mixin add-dependencies($class...) {
+  @if(type-of($class) == 'arglist') {
+    @each $item in $class {
+      @if not index($global-filter, $item) {
+        $global-filter: append($global-filter, '#{$item}') !global;
+        @debug $global-filter;
+      }
+    }
+  }
+}
