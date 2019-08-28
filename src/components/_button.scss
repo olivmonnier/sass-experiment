@@ -2,7 +2,6 @@ $_selector: 'c-button';
 
 @include exports($_selector) {
   .#{$_selector} {
-
     display: inline-block;
     font-weight: bold;
     text-align: left;

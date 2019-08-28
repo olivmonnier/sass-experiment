@@ -9,3 +9,9 @@
     text-align: right !important;
   }
 }
+
+@include exports('u-align-center') {
+  .u-align-center {
+    text-align: center !important;
+  }
+}

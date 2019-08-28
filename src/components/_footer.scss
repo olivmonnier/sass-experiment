@@ -1,16 +1,21 @@
-@include exports('o-box') {
+$_selector: 'c-footer';
+
+@include exports($_selector) {
   @include add-dependencies(
-    'u-align-left'
+    'u-align-left',
+    'u-list-inline'
   );
 
-  .o-box {
-    display: block;
-    width: 100%;
+  .#{$_selector} {
+    padding: 20px;
+    background-color: black;
+    color: white;
   }
 }
 
 ///-------------------------------------------------------------------------
-/// OBJECT BOX > LIST DEPENDENCIES
+/// COMPONENT FOOTER > LIST DEPENDENCIES
 ///-------------------------------------------------------------------------
 @import '../utilities/alignments';
+@import '../utilities/list';
 ///=========================================================================
