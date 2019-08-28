@@ -1,6 +1,4 @@
-$enable-all-classes: false;
+@import 'settings/index';
+@import 'tools/index';
 
-@import 'settings/core';
-@import 'tools/core';
-@import 'objects/core';
-@import 'utilities/core';
+@import 'pages/default';

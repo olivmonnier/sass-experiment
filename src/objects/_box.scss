@@ -1,10 +1,12 @@
-@include add-dependencies(
-  'u-align-left'
-);
+@include exports('o-box') {
+  $_dependencies: (
+    'u-align-left'
+  ) !global;
 
-@include render('box') {
   .o-box {
     display: block;
     width: 100%;
   }
 }
+
+@import '../utilities/alignments';
