@@ -1,0 +1,20 @@
+@mixin add-dependencies($list...) {
+  @if (type-of($list) == 'arglist') {
+    @each $item in $list {
+      @if (index($_dependencies, $item) == null) {
+        $_dependencies: append(
+          $_dependencies,
+          $item
+        ) !global;
+      }
+    }
+  }
+  @else if (type-of($list) == 'string') {
+    @if (index($_dependencies, $list) == null) {
+      $_dependencies: append(
+        $_dependencies,
+        $list
+      ) !global;
+    }
+  }
+}

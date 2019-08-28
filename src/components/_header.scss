@@ -1,16 +1,20 @@
-@include exports('o-box') {
+$_selector: 'c-header';
+
+@include exports($_selector) {
   @include add-dependencies(
-    'u-align-left'
+    'o-box',
+    'c-button', 'c-button--block'
   );
 
-  .o-box {
-    display: block;
-    width: 100%;
+  .#{$_selector} {
+    background: red;
+    color: white;
   }
 }
 
 ///-------------------------------------------------------------------------
-/// Object `o-box` LIST DEPENDENCIES
+/// COMPONENT HEADER > LIST DEPENDENCIES
 ///-------------------------------------------------------------------------
-@import '../utilities/alignments';
+@import '../objects/box';
+@import 'button';
 ///=========================================================================
