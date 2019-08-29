@@ -1,17 +1,11 @@
 @include exports('u-align-left') {
-  .u-align-left {
-    text-align: left !important;
-  }
+  text-align: left !important;
 }
 
 @include exports('u-align-right') {
-  .u-align-right {
-    text-align: right !important;
-  }
+  text-align: right !important;
 }
 
 @include exports('u-align-center') {
-  .u-align-center {
-    text-align: center !important;
-  }
+  text-align: center !important;
 }

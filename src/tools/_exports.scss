@@ -7,8 +7,12 @@
 @mixin exports($name, $warn: true) {
   @if (index($_imported, $name) == null) {
     @if (index($_dependencies, $name)) {
+      .#{$name} {
+        /* `#{$name}` */
+        @content;
+      }
       $_imported: append($_imported, $name) !global;
-      @content;
+      $_dependencies: remove($_dependencies, $name) !global;
     }
   } @else if $warn == true {
     @warn "Module `#{$name}` has already been imported.";

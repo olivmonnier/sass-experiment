@@ -1,16 +1,12 @@
 $_selector: 'c-button';
 
 @include exports($_selector) {
-  .#{$_selector} {
-    display: inline-block;
-    font-weight: bold;
-    text-align: left;
-    text-transform: uppercase;
+  display: inline-block;
+  font-weight: bold;
+  text-align: left;
+  text-transform: uppercase;
 
-    @include exports('#{$_selector}--block') {
-      &--block {
-        display: block;
-      }
-    }
+  @include exports('#{$_selector}--block') {
+    display: block;
   }
 }

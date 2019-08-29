@@ -6,20 +6,15 @@ $_selector: 'c-header';
     'c-button', 'c-button--block'
   );
 
-  .#{$_selector} {
-    background: red;
-    color: white;
-  }
+  background: red;
+  color: white;
 }
 
-/*
-///-------------------------------------------------------------------------
-/// COMPONENT HEADER > LIST DEPENDENCIES
-///-------------------------------------------------------------------------
+/* COMPONENT HEADER > LIST DEPENDENCIES
+///>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 */
 @import '../objects/box';
 @import 'button';
-/*
-/// COMPONENT HEADER > END LIST DEPENDENCIES
-///=========================================================================
+/* COMPONENT HEADER > END LIST DEPENDENCIES
+///<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 */

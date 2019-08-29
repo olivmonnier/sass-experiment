@@ -1,17 +1,13 @@
 @include exports('u-list-unstyled') {
-  .u-list-unstyled {
-    padding-left: 0;
-    list-style: none;
-  }
+  padding-left: 0;
+  list-style: none;
 }
 
 @include exports('u-list-inline') {
-  .u-list-inline {
-    padding-left: 0;
-    list-style: none;
+  padding-left: 0;
+  list-style: none;
 
-    > li {
-      display: inline-block;
-    }
+  > li {
+    display: inline-block;
   }
 }

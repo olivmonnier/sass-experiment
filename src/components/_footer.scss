@@ -6,21 +6,16 @@ $_selector: 'c-footer';
     'u-list-inline'
   );
 
-  .#{$_selector} {
-    padding: 20px;
-    background-color: black;
-    color: white;
-  }
+  padding: 20px;
+  background-color: black;
+  color: white;
 }
 
-/*
-///-------------------------------------------------------------------------
-/// COMPONENT FOOTER > LIST DEPENDENCIES
-///-------------------------------------------------------------------------
+/* COMPONENT FOOTER > LIST DEPENDENCIES
+///>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 */
 @import '../utilities/alignments';
 @import '../utilities/list';
-/*
-/// COMPONENT FOOTER > END LIST DEPENDENCIES
-///=========================================================================
+/* COMPONENT FOOTER > END LIST DEPENDENCIES
+///<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 */
