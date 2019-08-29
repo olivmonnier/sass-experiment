@@ -1,6 +1,5 @@
-@mixin add-dependencies($list...) {
-  /* Dependencies: #{$list} */
-  @if (type-of($list) == 'arglist') {
+@mixin add-dependencies($list) {
+  @if(type-of($list) == 'list') {
     @each $item in $list {
       $_dependencies: addDependency($item) !global;
     }

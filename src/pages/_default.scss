@@ -1,14 +1,7 @@
 /* `Page default` */
-@include add-dependencies(
-  'c-header',
-  'c-footer'
-);
+$_deps: 'c-header', 'c-footer';
 
-/* PAGE DEFAULT > LIST DEPENDENCIES
-///>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-*/
+@include add-dependencies($_deps);
+
 @import '../components/header';
 @import '../components/footer';
-/* PAGE DEFAULT > END LIST DEPENDENCIES
-///<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-*/

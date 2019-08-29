@@ -1,20 +1,10 @@
 $_selector: 'c-header';
+$_deps: 'o-box', 'c-button', 'c-button--block';
 
-@include exports($_selector) {
-  @include add-dependencies(
-    'o-box',
-    'c-button', 'c-button--block'
-  );
-
+@include exports($_selector, $_deps) {
   background: red;
   color: white;
 }
 
-/* COMPONENT HEADER > LIST DEPENDENCIES
-///>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-*/
 @import '../objects/box';
 @import 'button';
-/* COMPONENT HEADER > END LIST DEPENDENCIES
-///<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-*/

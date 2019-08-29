@@ -1,18 +1,9 @@
 $_selector: 'o-box';
+$_deps: 'u-align-left';
 
-@include exports($_selector) {
-  @include add-dependencies(
-    'u-align-left'
-  );
-
+@include exports($_selector, $_deps) {
   display: block;
   width: 100%;
 }
 
-/* OBJECT BOX > LIST DEPENDENCIES
-///>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-*/
 @import '../utilities/alignments';
-/* OBJECT BOX > END LIST DEPENDENCIES
-///<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-*/

@@ -4,11 +4,13 @@
 /// @param {String} $name - Name of exported module
 /// @param {Bool} $warn [true] - Warn when module has been already imported
 /// @require $_imported
-@mixin exports($name, $warn: true) {
+@mixin exports($name, $deps: (), $warn: true) {//) {
   @if (index($_imported, $name) == null) {
     @if (index($_dependencies, $name)) {
       .#{$name} {
         /* `#{$name}` */
+        @include add-dependencies($deps);
+        -cls-dependencies: $deps;
         @content;
       }
       $_imported: append($_imported, $name) !global;
