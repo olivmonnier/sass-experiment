@@ -2,9 +2,10 @@
 /// This mixin helps making sure a module is imported once and only once.
 /// @access public
 /// @param {String} $name - Name of exported module
+/// @param {List} $deps [()] - Object dependencies
 /// @param {Bool} $warn [true] - Warn when module has been already imported
 /// @require $_imported
-@mixin exports($name, $deps: (), $warn: true) {//) {
+@mixin exports($name, $deps: (), $warn: true) {
   @if (index($_imported, $name) == null) {
     @if (index($_dependencies, $name)) {
       .#{$name} {
