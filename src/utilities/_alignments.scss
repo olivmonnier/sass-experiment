@@ -1,4 +1,4 @@
-@include exports('u-align-left') {
+@include exports('u-align-left', ('u-align-right')) {
   text-align: left !important;
 }
 

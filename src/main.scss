@@ -1,4 +1,15 @@
 @import 'settings/index';
 @import 'tools/index';
 
-@import 'pages/default';
+/// Objects
+@import 'objects/box';
+/// Components
+@import 'components/header';
+@import 'components/button';
+/// Utilities
+@import 'utilities/alignments';
+
+@debug $_imported;
+.test {
+  @extend %c-header;
+}
