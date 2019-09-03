@@ -1,15 +1,6 @@
 @import 'settings/index';
 @import 'tools/index';
 
-/// Objects
-@import 'objects/box';
-/// Components
-@import 'components/header';
-@import 'components/button';
-/// Utilities
-@import 'utilities/alignments';
-
-@debug $_imported;
-.test {
-  @extend %c-header;
-}
+@import 'objects/core';
+@import 'components/core';
+@import 'utilities/core';

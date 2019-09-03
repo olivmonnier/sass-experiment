@@ -1,0 +1,9 @@
+@mixin render($name, $layer) {
+  @debug map-get($_imported, $layer);
+
+  @if (index(map-get($_imported, $layer), $name)) {
+    .#{$name} {
+      @extend %#{$name};
+    }
+  }
+}
