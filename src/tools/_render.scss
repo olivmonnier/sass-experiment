@@ -1,9 +1,87 @@
-@mixin render($name, $layer) {
-  @debug map-get($_imported, $layer);
-
-  @if (index(map-get($_imported, $layer), $name)) {
-    .#{$name} {
-      @extend %#{$name};
+@mixin render($deps...) {
+  @if (type-of($deps) == "arglist") {
+    @each $dep in $deps {
+      $layer: findLayer($dep);
+      $dependencies: findDependencies($dep, $layer);
+      $_filters: addFilter($dep, $layer) !global;
     }
   }
+
+  @each $layerKey, $layerValue in $_filters {
+    @each $part in $layerValue {
+      .#{$part} {
+        @extend %#{$part};
+      }
+    }
+  }
+}
+
+@function findLayer($name) {
+  $l: null !default;
+
+  @each $layerKey, $layerValue in $_imported {
+    @if (map-has-key($layerValue, $name)) {
+      $l: $layerKey;
+    }
+  }
+  @return $l;
+}
+
+@function findDependencies($name, $layer: null) {
+  $l: null !default;
+  $deps: null !default;
+
+  @if ($layer != null) {
+    $l: $layer;
+  } @else {
+    $l: findLayer($name);
+  }
+  
+  @if ($l != null) {
+    $deps: map-get(map-get($_imported, $l), $name);
+  }
+
+  @return $deps;
+}
+
+@function addFilter($name, $layer: null) {
+  $l: null !default;
+  $result: $_filters !default;
+
+  @if ($layer != null) {
+    $l: $layer;
+  } @else {
+    $l: findLayer($name);
+  }
+
+  @if ($l != null) {
+    @if not existFilter($name, $l) {
+      $result: map-merge($_filters, (
+        $l: append(map-get($_filters,  $l), '#{$name}')
+      ));
+    }
+  }
+
+  @return $result;
+}
+
+@function existFilter($name, $layer: null) {
+  $l: null !default;
+  $result: true;
+
+  @if ($layer != null) {
+    $l: $layer;
+  } @else {
+    $l: findLayer($name);
+  }
+
+  @if ($l != null) {
+    $i: index(map-get($_filters, $l), $name);
+
+    @if ($i == null) {
+      $result: false;
+    }
+  }
+
+  @return $result;
 }

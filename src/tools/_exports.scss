@@ -4,7 +4,7 @@
       @content;
     }
     $_imported: map-merge($_imported, (
-      $_layer: append(map-get($_imported,  $_layer), '#{$name}')
+      $_layer: map-merge(map-get($_imported,  $_layer), ($name: $deps))
     )) !global;
   }
 }

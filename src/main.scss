@@ -4,3 +4,7 @@
 @import 'objects/core';
 @import 'components/core';
 @import 'utilities/core';
+
+@include render(
+  'c-header'
+)
