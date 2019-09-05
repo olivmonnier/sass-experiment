@@ -1,11 +1,5 @@
 @mixin render($deps...) {
-  @if (type-of($deps) == "arglist") {
-    @each $dep in $deps {
-      $layer: findLayer($dep);
-      $dependencies: findDependencies($dep, $layer);
-      $_filters: addFilter($dep, $layer) !global;
-    }
-  }
+  @include _buildItems($deps);
 
   @each $layerKey, $layerValue in $_filters {
     @each $part in $layerValue {
@@ -16,41 +10,59 @@
   }
 }
 
+@mixin _buildItems($parts) {
+  @if (type-of($parts) == "arglist" or type-of($parts) == "list") {
+    @each $part in $parts {
+      @include _addItem($part);
+    }
+  }
+  @else if (type-of($parts) == "string") {
+    @include _addItem($parts);
+  }
+}
+
+@mixin _addItem($part) {
+  $layer: findLayer($part);
+  $dependencies: findDependencies($part, $layer);
+  $_filters: addFilter($part, $layer) !global;
+
+  @if (length($dependencies) > 0) {
+    @include _buildItems($dependencies);
+  }
+}
+
 @function findLayer($name) {
   $l: null !default;
 
-  @each $layerKey, $layerValue in $_imported {
+  @each $layerKey, $layerValue in $_exported {
     @if (map-has-key($layerValue, $name)) {
       $l: $layerKey;
     }
   }
+
   @return $l;
 }
 
 @function findDependencies($name, $layer: null) {
-  $l: null !default;
+  $l: $layer !default;
   $deps: null !default;
 
-  @if ($layer != null) {
-    $l: $layer;
-  } @else {
+  @if ($l == null) {
     $l: findLayer($name);
   }
   
   @if ($l != null) {
-    $deps: map-get(map-get($_imported, $l), $name);
+    $deps: map-get(map-get($_exported, $l), $name);
   }
 
   @return $deps;
 }
 
 @function addFilter($name, $layer: null) {
-  $l: null !default;
+  $l: $layer !default;
   $result: $_filters !default;
 
-  @if ($layer != null) {
-    $l: $layer;
-  } @else {
+  @if ($l == null) {
     $l: findLayer($name);
   }
 
@@ -66,12 +78,10 @@
 }
 
 @function existFilter($name, $layer: null) {
-  $l: null !default;
+  $l: $layer !default;
   $result: true;
 
-  @if ($layer != null) {
-    $l: $layer;
-  } @else {
+  @if ($l == null) {
     $l: findLayer($name);
   }
 

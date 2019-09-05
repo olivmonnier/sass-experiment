@@ -1,10 +1,10 @@
 @mixin exports($name, $deps: ()) {
-  @if not (index(map-get($_imported, $_layer), $name)) {
+  @if not (index(map-get($_exported, $_layer), $name)) {
     @include placeholder($name) {
       @content;
     }
-    $_imported: map-merge($_imported, (
-      $_layer: map-merge(map-get($_imported,  $_layer), ($name: $deps))
+    $_exported: map-merge($_exported, (
+      $_layer: map-merge(map-get($_exported,  $_layer), ($name: $deps))
     )) !global;
   }
 }
