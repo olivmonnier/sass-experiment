@@ -1,7 +1,7 @@
 @mixin render($deps...) {
   @include _buildItems($deps);
 
-  @each $layerKey, $layerValue in $_filters {
+  @each $layerKey, $layerValue in $_render-items {
     @each $part in $layerValue {
       .#{$part} {
         @extend %#{$part};
@@ -22,16 +22,16 @@
 }
 
 @mixin _addItem($part) {
-  $layer: findLayer($part);
-  $dependencies: findDependencies($part, $layer);
-  $_filters: addFilter($part, $layer) !global;
+  $layer: _findLayer($part);
+  $dependencies: _findDependencies($part, $layer);
+  $_render-items: _addRenderItem($part, $layer) !global;
 
   @if (length($dependencies) > 0) {
     @include _buildItems($dependencies);
   }
 }
 
-@function findLayer($name) {
+@function _findLayer($name) {
   $l: null !default;
 
   @each $layerKey, $layerValue in $_exported {
@@ -43,12 +43,12 @@
   @return $l;
 }
 
-@function findDependencies($name, $layer: null) {
+@function _findDependencies($name, $layer: null) {
   $l: $layer !default;
   $deps: null !default;
 
   @if ($l == null) {
-    $l: findLayer($name);
+    $l: _findLayer($name);
   }
   
   @if ($l != null) {
@@ -58,18 +58,18 @@
   @return $deps;
 }
 
-@function addFilter($name, $layer: null) {
+@function _addRenderItem($name, $layer: null) {
   $l: $layer !default;
-  $result: $_filters !default;
+  $result: $_render-items !default;
 
   @if ($l == null) {
-    $l: findLayer($name);
+    $l: _findLayer($name);
   }
 
   @if ($l != null) {
-    @if not existFilter($name, $l) {
-      $result: map-merge($_filters, (
-        $l: append(map-get($_filters,  $l), '#{$name}')
+    @if not _existRenderItem($name, $l) {
+      $result: map-merge($_render-items, (
+        $l: append(map-get($_render-items,  $l), '#{$name}')
       ));
     }
   }
@@ -77,16 +77,16 @@
   @return $result;
 }
 
-@function existFilter($name, $layer: null) {
+@function _existRenderItem($name, $layer: null) {
   $l: $layer !default;
   $result: true;
 
   @if ($l == null) {
-    $l: findLayer($name);
+    $l: _findLayer($name);
   }
 
   @if ($l != null) {
-    $i: index(map-get($_filters, $l), $name);
+    $i: index(map-get($_render-items, $l), $name);
 
     @if ($i == null) {
       $result: false;
