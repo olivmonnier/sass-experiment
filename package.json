@@ -13,5 +13,8 @@
   "dependencies": {
     "node-sass": "^4.12.0",
     "rimraf": "^3.0.0"
+  },
+  "devDependencies": {
+    "sass-true": "^5.0.0"
   }
 }

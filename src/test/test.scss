@@ -1,0 +1,15 @@
+@import '../../node_modules/sass-true/sass/true';
+
+@import '../settings/index';
+@import '../tools/index';
+
+@include test('Sass math compiles before output') {
+  @include assert {
+    @include output {
+      width: 14em + 2;
+    }
+    @include expect {
+      width: 16em;
+    }
+  }
+}
