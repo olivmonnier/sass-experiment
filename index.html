@@ -14,7 +14,11 @@
 
   <script src="main.js"></script>
   <script>
-    checkCssUnused();
+    const clsUnused = checkCssUnused();
+
+    if (clsUnused.length > 0) {
+      showClassesUnused(clsUnused);
+    }
   </script>
 </body>
 </html>

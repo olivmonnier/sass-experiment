@@ -1,15 +1,13 @@
 function checkCssUnused() {
   const listCssUsed = getCssUsed();
 
-  const clsUnused = listCssUsed
-    .map(layer => Object.values(layer)[0])
-    .flat()
-    .filter(c => document.querySelectorAll(`.${c}`).length === 0);
-
-  if (clsUnused.length > 0) {
-    console.warn('Unused classes list: ');
-    console.table(clsUnused);
-  }
+  return listCssUsed
+    .map(({ layer, dependencies }) => ({
+      layer,
+      dependencies: dependencies
+        .filter(dep => document.querySelectorAll(`.${dep}`).length === 0)
+    }))
+    .filter(({dependencies}) => dependencies.length > 0);
 }
 
 function getCssUsed() {
@@ -19,5 +17,13 @@ function getCssUsed() {
 
   return clsUsed.split(', ')
     .map(layer => layer.split(': '))
-    .map(([layer, deps]) => ({ [layer]: deps.replace(/"/g, '').split(' ') }));
+    .map(([layer, deps]) => ({ layer, dependencies: deps.replace(/"/g, '').split(' ')}))
+}
+
+function showClassesUnused(cls) {
+  console.warn('Unused classes list: ');
+  console.table(cls.map(({ layer, dependencies }) => 
+    ({ layer, dependencies: dependencies.join(', ') })),
+    ["layer", "dependencies"]
+  );
 }

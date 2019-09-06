@@ -1,4 +1,4 @@
-@include exports('o-box', ('u-align-left')) {
+@include exports('o-box', ('u-align-left', 'u-align-right')) {
   display: block;
   width: 100%;
 }
