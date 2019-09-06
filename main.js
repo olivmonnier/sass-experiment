@@ -15,7 +15,7 @@ function checkCssUnused() {
 function getCssUsed() {
   const clsUsed = getComputedStyle(document.documentElement)
     .getPropertyValue('--cls-used')
-    .replace(/(^\(|\)$)/g, '');
+    .replace(/(^ \(|\)$)/g, '');
 
   return clsUsed.split(', ')
     .map(layer => layer.split(': '))

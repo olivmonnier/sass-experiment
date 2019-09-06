@@ -2,7 +2,7 @@
   @include _buildItems($deps);
 
   :root {
-    --cls-used:#{$_render_items};
+    --cls-used: #{$_render_items};
   }
 
   @each $layerKey, $layerValue in $_render-items {
