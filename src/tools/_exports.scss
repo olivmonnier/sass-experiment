@@ -9,9 +9,8 @@
   @if (index($_imported, $name) == null) {
     @if (index($_dependencies, $name)) {
       .#{$name} {
-        /* `#{$name}` */
         @include add-dependencies($deps);
-        -cls-dependencies: $deps;
+        --cls-dependencies: $deps;
         @content;
       }
       $_imported: append($_imported, $name) !global;
