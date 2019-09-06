@@ -1,4 +1,4 @@
-function checkCssUsed() {
+function checkCssUnused() {
   const listCssUsed = getCssUsed();
 
   const clsUnused = listCssUsed
