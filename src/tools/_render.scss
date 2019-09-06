@@ -1,10 +1,20 @@
 @mixin render($deps...) {
   @include _buildItems($deps);
 
+  :root {
+    --cls-used:#{$_render_items};
+  }
+
   @each $layerKey, $layerValue in $_render-items {
     @each $part in $layerValue {
+      $dependencies: _findDependencies($part);
+
       .#{$part} {
         @extend %#{$part};
+        
+        @if (length($dependencies) > 0) {
+          --cls-dependencies: #{$dependencies};
+        }
       }
     }
   }
