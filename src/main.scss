@@ -1,4 +1,10 @@
 @import 'settings/index';
 @import 'tools/index';
 
-@import 'pages/default';
+@import 'objects/core';
+@import 'components/core';
+@import 'utilities/core';
+
+@include render(
+  'c-header'
+);

@@ -1,23 +1,10 @@
-/// Module exports mixin
-/// This mixin helps making sure a module is imported once and only once.
-/// @access public
-/// @param {String} $name - Name of exported module
-/// @param {String | List} $deps [()] - Object dependencies
-/// @param {Bool} $warn [true] - Warn when module has been already imported
-/// @require $_imported
-@mixin exports($name, $deps: (), $warn: true) {
-  @if (index($_imported, $name) == null) {
-    @if (index($_dependencies, $name)) {
-      .#{$name} {
-        /* `#{$name}` */
-        @include add-dependencies($deps);
-        -cls-dependencies: $deps;
-        @content;
-      }
-      $_imported: append($_imported, $name) !global;
-      $_dependencies: remove($_dependencies, $name) !global;
+@mixin exports($name, $deps: ()) {
+  @if not (index(map-get($_exported, $_layer), $name)) {
+    @include placeholder($name) {
+      @content;
     }
-  } @else if $warn == true {
-    @warn "Module `#{$name}` has already been imported.";
+    $_exported: map-merge($_exported, (
+      $_layer: map-merge(map-get($_exported,  $_layer), ($name: $deps))
+    )) !global;
   }
 }

@@ -1,0 +1,107 @@
+@mixin render($deps...) {
+  @include _buildItems($deps);
+
+  :root {
+    --cls-used:#{$_render_items};
+  }
+
+  @each $layerKey, $layerValue in $_render-items {
+    @each $part in $layerValue {
+      $dependencies: _findDependencies($part);
+
+      .#{$part} {
+        @extend %#{$part};
+        
+        @if (length($dependencies) > 0) {
+          --cls-dependencies: #{$dependencies};
+        }
+      }
+    }
+  }
+}
+
+@mixin _buildItems($parts) {
+  @if (type-of($parts) == "arglist" or type-of($parts) == "list") {
+    @each $part in $parts {
+      @include _addItem($part);
+    }
+  }
+  @else if (type-of($parts) == "string") {
+    @include _addItem($parts);
+  }
+}
+
+@mixin _addItem($part) {
+  $layer: _findLayer($part);
+  $dependencies: _findDependencies($part, $layer);
+  $_render-items: _addRenderItem($part, $layer) !global;
+
+  @if (length($dependencies) > 0) {
+    @include _buildItems($dependencies);
+  }
+}
+
+@function _findLayer($name) {
+  $l: null !default;
+
+  @each $layerKey, $layerValue in $_exported {
+    @if (map-has-key($layerValue, $name)) {
+      $l: $layerKey;
+    }
+  }
+
+  @return $l;
+}
+
+@function _findDependencies($name, $layer: null) {
+  $l: $layer !default;
+  $deps: null !default;
+
+  @if ($l == null) {
+    $l: _findLayer($name);
+  }
+  
+  @if ($l != null) {
+    $deps: map-get(map-get($_exported, $l), $name);
+  }
+
+  @return $deps;
+}
+
+@function _addRenderItem($name, $layer: null) {
+  $l: $layer !default;
+  $result: $_render-items !default;
+
+  @if ($l == null) {
+    $l: _findLayer($name);
+  }
+
+  @if ($l != null) {
+    @if not _existRenderItem($name, $l) {
+      $result: map-merge($_render-items, (
+        $l: append(map-get($_render-items,  $l), '#{$name}')
+      ));
+    }
+  }
+
+  @return $result;
+}
+
+@function _existRenderItem($name, $layer: null) {
+  $l: $layer !default;
+  $result: true;
+
+  @if ($l == null) {
+    $l: _findLayer($name);
+  }
+
+  @if ($l != null) {
+    $i: index(map-get($_render-items, $l), $name);
+
+    @if ($i == null) {
+      $result: false;
+    }
+  }
+
+  @return $result;
+}

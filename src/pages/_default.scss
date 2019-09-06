@@ -1,7 +1,0 @@
-/* `Page default` */
-$_deps: 'c-header', 'c-footer';
-
-@include add-dependencies($_deps);
-
-@import '../components/header';
-@import '../components/footer';

@@ -1,9 +1,4 @@
-$_selector: 'o-box';
-$_deps: 'u-align-left';
-
-@include exports($_selector, $_deps) {
+@include exports('o-box', ('u-align-left')) {
   display: block;
   width: 100%;
 }
-
-@import '../utilities/alignments';
