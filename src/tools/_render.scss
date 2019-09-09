@@ -1,4 +1,10 @@
 @mixin render($deps...) {
+  @if (length($_render-items) == 0) {
+    @each $layer in map-keys($_exported) {
+      $_render-items: map-merge($_render-items, ($layer: ())) !global;
+    }
+  }
+  
   @include _buildItems($deps);
 
   :root {

@@ -1,4 +1,7 @@
 @mixin exports($name, $deps: ()) {
+  @if not (map-has-key($_exported, $_layer)) {
+    $_exported: map-merge($_exported, ($_layer: ())) !global;
+  }
   @if not (index(map-get($_exported, $_layer), $name)) {
     @include placeholder($name) {
       @content;

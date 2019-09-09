@@ -20,7 +20,7 @@ function getCssUsed() {
     .split(", ")
     .map(layer => layer.split(": "))
     .map(([layer, deps]) => ({
-      layer,
+      layer: layer.replace(/"/g, ""),
       dependencies: deps.replace(/"/g, "").split(" ")
     }));
 }
