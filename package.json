@@ -1,11 +1,11 @@
 {
-  "name": "sass-experiment",
+  "name": "selector-unused",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/_selector-unused.scss",
   "scripts": {
-    "clean": "rimraf dest",
-    "build": "npm run clean && node-sass src/main.scss dest/styles.css"
+    "example:clean": "rimraf example/dest",
+    "example:build": "npm run example:clean && node-sass example/scss/main.scss example/dest/styles.css"
   },
   "keywords": [],
   "author": "",
